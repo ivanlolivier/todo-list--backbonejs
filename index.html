@@ -7,14 +7,63 @@
 </head>
 <body>
 
-<div id="app"></div>
+<div id="app" class="container"></div>
 
-<script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
-<script type="text/javascript" src="node_modules/underscore/underscore-min.js"></script>
-<script type="text/javascript" src="node_modules/backbone/backbone-min.js"></script>
-<script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/template" id="tasks_view_template">
+    <h1>Todo list</h1>
 
-<script type="text/javascript" src="assets/js/backbone/init.js"></script>
+    <hr>
+
+    <form class="form-inline">
+        <div class="form-group">
+            <input type="text" class="form-control" id="newTask" placeholder="New Task">
+        </div>
+        <button type="submit" class="btn btn-default">Add</button>
+    </form>
+
+    <hr>
+
+    <h2>Pending</h2>
+    <ul class="list-group">
+        <% _.each(tasks, function(task){ %>
+        <li class="list-group-item task" data-cid="<%=task.cid%>">
+            <a href="#task/<%=task.cid%>"><%= task.description %></a>
+            <div style="float:right">
+                <a href="#" class="complete-task">Done</a>
+                 -
+                <a href="#" class="delete-task">X</a>
+            </div>
+        </li>
+        <% }); %>
+
+    </ul>
+
+    <hr>
+
+    <h2>Completed</h2>
+    <ul class="list-group">
+        
+    </ul>
+
+
+</script>
+
+<script type="text/template" id="task_view_template">
+    Task: <%=description%>
+    Completed: <%=completed%>
+</script>
+
+<script type="text/javascript" src="/node_modules/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="/node_modules/underscore/underscore.js"></script>
+<script type="text/javascript" src="/node_modules/backbone/backbone.js"></script>
+<script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+<script type="text/javascript" src="/assets/js/backbone/models/Task.js"></script>
+<script type="text/javascript" src="/assets/js/backbone/collections/TasksCollection.js"></script>
+<script type="text/javascript" src="/assets/js/backbone/views/Task/TaskView.js"></script>
+<script type="text/javascript" src="/assets/js/backbone/views/Tasks/TasksView.js"></script>
+<script type="text/javascript" src="/assets/js/backbone/routes/AppRouter.js"></script>
+<script type="text/javascript" src="/assets/js/backbone/init.js"></script>
 
 </body>
 </html>
