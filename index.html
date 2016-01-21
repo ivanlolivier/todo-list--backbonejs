@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Tareas</title>
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
 </head>
 <body>
 
@@ -25,16 +25,18 @@
 
     <h2>Pending</h2>
     <ul class="list-group">
-        <% _.each(tasks, function(task){ %>
+        <% _.each(tasks, function(task){
+        if (! task.completed) { %>
         <li class="list-group-item task" data-cid="<%=task.cid%>">
             <a href="#task/<%=task.cid%>"><%= task.description %></a>
             <div style="float:right">
                 <a href="#" class="complete-task">Done</a>
-                 -
+                -
                 <a href="#" class="delete-task">X</a>
             </div>
         </li>
-        <% }); %>
+        <% }
+        }); %>
 
     </ul>
 
@@ -42,7 +44,17 @@
 
     <h2>Completed</h2>
     <ul class="list-group">
-        
+        <% _.each(tasks, function(task){
+        if (task.completed) { %>
+        <li class="list-group-item task" data-cid="<%=task.cid%>">
+            <a href="#task/<%=task.cid%>"><%= task.description %></a>
+            <div style="float:right">
+                <a href="#" class="delete-task">X</a>
+            </div>
+        </li>
+        <% }
+        }); %>
+
     </ul>
 
 

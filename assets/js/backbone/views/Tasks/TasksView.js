@@ -3,18 +3,30 @@ var TasksView = Backbone.View.extend({
 
     events: {
         'click button': 'addTask',
-        'click .delete-task': 'deleteTask'
+        'click .delete-task': 'deleteTask',
+        'click .complete-task': 'completeTask'
     },
 
     addTask: function(e) {
         e.preventDefault();
+
         this.model.add( new Task({ description: $('#newTask').val() }) );
         $('#newTask').val('');
     },
 
     deleteTask: function(e) {
         e.preventDefault();
+
         this.model.remove( this.model.get({ cid: $(e.target).parents('.task').data('cid') }) );
+    },
+
+    completeTask: function(e) {
+        e.preventDefault();
+
+        var task = this.model.get({ cid: $(e.target).parents('.task').data('cid') });
+        task.set({ completed: true });
+
+        this.render();
     },
 
     initialize: function() {
